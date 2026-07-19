@@ -1,3 +1,7 @@
 # الرياض سيتي للشقق الفندقية
 
-المستودع التجريبي للموقع، مع نشر تلقائي عبر GitHub Pages.
+نسخة تجريبية من الموقع منشورة تلقائيًا عبر GitHub Pages.
+
+## المعاينة
+
+https://hani-site-spec.github.io/riyadh-city-hotel/
