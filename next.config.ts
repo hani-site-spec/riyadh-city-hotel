@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
-const usesCustomDomain = process.env.CUSTOM_DOMAIN === "riyadhcityhotel.com";
+const usesCustomDomain =
+  process.env.CUSTOM_DOMAIN === "riyadhcityhotelapartments.com";
 const githubPagesBasePath =
   process.env.GITHUB_ACTIONS === "true" && repositoryName && !usesCustomDomain
     ? `/${repositoryName}`
