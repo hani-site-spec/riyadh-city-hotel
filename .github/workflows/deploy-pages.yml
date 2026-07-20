@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      CUSTOM_DOMAIN: riyadhcityhotelapartments.com
+      CUSTOM_DOMAIN: riyadhcityhotel.com
     steps:
       - name: Checkout
         uses: actions/checkout@v4
