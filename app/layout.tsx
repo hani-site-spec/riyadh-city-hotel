@@ -16,12 +16,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://riyadhcityhotel.com"),
   title: "الرياض سيتي | للشقق الفندقية",
   description:
     "الرياض سيتي للشقق الفندقية في الغيضة — إقامة عصرية تجمع الراحة والخصوصية والتصميم العملي.",
-  other: {
-    "codex-preview": "development",
-  },
   icons: {
     icon: logoPath,
     shortcut: logoPath,
