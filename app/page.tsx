@@ -104,6 +104,25 @@ const gallery = [
   },
 ];
 
+const stayPolicies = [
+  "تسجيل الدخول: يبدأ من الساعة 3:00 مساءً.",
+  "تسجيل الخروج: بحد أقصى الساعة 1:00 ظهرًا.",
+  "الدخول المبكر أو الخروج المتأخر يخضع لتوفر الشقق وموافقة الإدارة، وقد تترتب عليه رسوم إضافية.",
+  "يجب إبراز أصل الهوية أو جواز السفر وتسجيل جميع النزلاء لدى الاستقبال.",
+  "يُمنع مبيت أو استقبال أشخاص غير مسجلين دون موافقة الإدارة.",
+  "يجب سداد قيمة الإقامة قبل استلام الشقة.",
+  "يُمنع منعًا باتًا إدخال الأسلحة والذخائر.",
+  "يُمنع التدخين داخل الممرات والمصعد.",
+  "يُمنع إقامة الحفلات أو التجمعات أو التسبب في إزعاج النزلاء.",
+  "يُرجى الالتزام بالهدوء من الساعة 11:00 مساءً حتى 8:00 صباحًا.",
+  "يتحمل النزيل مسؤولية أي تلف أو كسر أو فقدان في محتويات الشقة.",
+  "يُمنع نقل الأثاث أو إخراج أي من ممتلكات الشقة.",
+  "يتحمل أولياء الأمور مسؤولية سلامة ومراقبة الأطفال.",
+  "يُرجى المحافظة على النظافة وعدم إلقاء المخلفات أو الزيوت داخل دورات المياه أو أحواض المطبخ.",
+  "يحق للإدارة إنهاء الإقامة عند مخالفة التعليمات، دون استرداد المبالغ المدفوعة.",
+  "إتمام الحجز أو تسجيل الدخول يُعد موافقة على جميع سياسات المنشأة.",
+];
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -160,6 +179,7 @@ export default function Home() {
           <a href="#about" onClick={() => setMenuOpen(false)}>عن المشروع</a>
           <a href="#units" onClick={() => setMenuOpen(false)}>الشقق</a>
           <a href="#gallery" onClick={() => setMenuOpen(false)}>المعرض</a>
+          <a href="#policies" onClick={() => setMenuOpen(false)}>سياسات الإقامة</a>
           <a href="#contact" onClick={() => setMenuOpen(false)}>التواصل</a>
         </nav>
 
@@ -306,11 +326,41 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="policies section" id="policies" aria-labelledby="policies-title">
+        <div className="page-shell">
+          <div className="section-kicker"><span>04</span><p>سياسات الإقامة</p></div>
+          <div className="policies-heading">
+            <div>
+              <h2 id="policies-title">إقامة مريحة،<br /><em>وقواعد واضحة.</em></h2>
+              <p>نرحب بكم، ونأمل الالتزام بالتعليمات التالية لضمان راحة وسلامة الجميع.</p>
+            </div>
+            <div className="policy-highlights" aria-label="أهم مواعيد الإقامة">
+              <div><span>تسجيل الدخول</span><strong dir="rtl">3:00 مساءً</strong></div>
+              <div><span>تسجيل الخروج</span><strong dir="rtl">1:00 ظهرًا</strong></div>
+              <div><span>ساعات الهدوء</span><strong dir="rtl">11:00 مساءً – 8:00 صباحًا</strong></div>
+            </div>
+          </div>
+          <ol className="policies-list">
+            {stayPolicies.map((policy, index) => (
+              <li key={policy}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <p>{policy}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="policies-note">
+            <span aria-hidden="true">✦</span>
+            <p>شكرًا لتعاونكم، ونتمنى لكم إقامة سعيدة وآمنة.</p>
+            <strong>إدارة الرياض سيتي للشقق الفندقية</strong>
+          </div>
+        </div>
+      </section>
+
       <section className="contact section" id="contact">
         <div className="contact-glow" />
         <div className="page-shell contact-grid">
           <div className="contact-copy">
-            <div className="section-kicker light"><span>04</span><p>تواصل معنا</p></div>
+            <div className="section-kicker light"><span>05</span><p>تواصل معنا</p></div>
             <h2>لنرتّب لك<br /><em>إقامة مريحة.</em></h2>
             <p>للحجز والاستفسار، تواصل معنا مباشرة عبر الهاتف أو واتساب، وسنكون سعداء بخدمتك.</p>
             <div className="contact-methods">
