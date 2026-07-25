@@ -215,8 +215,12 @@ export default function Home() {
         />
         <div className="hero-shade" />
         <div className="hero-content page-shell">
-          <div className="hero-project-name" aria-label="الرياض سيتي للشقق الفندقية">
+          <div
+            className="hero-project-name"
+            aria-label="الرياض سيتي للشقق الفندقية — Riyadh City Hotel Apartments"
+          >
             <strong>الرياض سيتي</strong>
+            <small lang="en" dir="ltr">Riyadh City Hotel Apartments</small>
             <span>للشقق الفندقية</span>
           </div>
           <p className="eyebrow"><span /> مشروع ضيافة حديث في الغيضة</p>
