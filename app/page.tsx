@@ -49,7 +49,7 @@ const gallery = [
     note: "هوية الرياض سيتي",
   },
   {
-    src: "/images/riyadh-city-building-night.webp",
+    src: "/images/riyadh-city-hero-main.webp",
     alt: "صورة جوية ليلية لمبنى الرياض سيتي للشقق الفندقية",
     title: "إطلالة المبنى ليلًا",
     note: "صورة جوية لواجهة المبنى",
@@ -206,7 +206,7 @@ export default function Home() {
       <section className="hero" id="home" aria-labelledby="hero-title">
         <Image
           className="hero-image"
-          src={assetPath("/images/riyadh-city-building-night.webp")}
+          src={assetPath("/images/riyadh-city-hero-main.webp")}
           alt="صورة جوية ليلية لمبنى الرياض سيتي للشقق الفندقية"
           width={1536}
           height={1024}
