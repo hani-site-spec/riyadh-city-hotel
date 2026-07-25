@@ -220,8 +220,8 @@ export default function Home() {
             aria-label="الرياض سيتي للشقق الفندقية — Riyadh City Hotel Apartments"
           >
             <strong>الرياض سيتي</strong>
-            <small lang="en" dir="ltr">Riyadh City Hotel Apartments</small>
             <span>للشقق الفندقية</span>
+            <small lang="en" dir="ltr">Riyadh City Hotel Apartments</small>
           </div>
           <p className="eyebrow"><span /> مشروع ضيافة حديث في الغيضة</p>
           <h1 id="hero-title">إقامة أهدأ.<br /><em>تفاصيل أذكى.</em></h1>
