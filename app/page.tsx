@@ -6,6 +6,27 @@ import Image from "next/image";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const assetPath = (path: string) => `${basePath}${path}`;
 
+function toDateInputValue(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function nextDay(dateValue: string) {
+  if (!dateValue) return "";
+  const date = new Date(`${dateValue}T00:00:00`);
+  date.setDate(date.getDate() + 1);
+  return toDateInputValue(date);
+}
+
+function formatBookingDate(dateValue: FormDataEntryValue | null) {
+  const value = String(dateValue || "");
+  if (!value) return "غير محدد";
+  const [year, month, day] = value.split("-");
+  return `${day}/${month}/${year}`;
+}
+
 const units = [
   {
     number: "01",
@@ -127,8 +148,13 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [today, setToday] = useState("");
+  const [checkIn, setCheckIn] = useState("");
+  const [formError, setFormError] = useState("");
 
   useEffect(() => {
+    setToday(toDateInputValue(new Date()));
+
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setSelectedImage(null);
@@ -148,11 +174,22 @@ export default function Home() {
       other: "استفسار عام",
     };
     const subject = String(formData.get("subject") || "booking");
+    const checkInDate = String(formData.get("checkIn") || "");
+    const checkOutDate = String(formData.get("checkOut") || "");
+
+    if (!checkInDate || !checkOutDate || checkOutDate <= checkInDate) {
+      setFormError("يرجى اختيار تاريخ مغادرة لاحق لتاريخ الوصول.");
+      return;
+    }
+
+    setFormError("");
     const message = [
       "مرحبًا، أرغب في الاستفسار عبر موقع الرياض سيتي للشقق الفندقية.",
       `الاسم: ${String(formData.get("name") || "")}`,
       `رقم التواصل: ${String(formData.get("phone") || "")}`,
       `نوع الاستفسار: ${subjects[subject] || subjects.other}`,
+      `تاريخ الوصول: ${formatBookingDate(formData.get("checkIn"))}`,
+      `تاريخ المغادرة: ${formatBookingDate(formData.get("checkOut"))}`,
       `الرسالة: ${String(formData.get("message") || "")}`,
     ].join("\n");
 
@@ -424,6 +461,33 @@ export default function Home() {
                     <option value="other">استفسار عام</option>
                   </select>
                 </label>
+                <div className="field-row booking-dates">
+                  <label>تاريخ الوصول
+                    <input
+                      className="date-field"
+                      name="checkIn"
+                      type="date"
+                      min={today}
+                      onInput={(event) => {
+                        const value = event.currentTarget.value;
+                        setCheckIn(value);
+                        setFormError("");
+                      }}
+                      required
+                    />
+                  </label>
+                  <label>تاريخ المغادرة
+                    <input
+                      className="date-field"
+                      name="checkOut"
+                      type="date"
+                      min={nextDay(checkIn) || today}
+                      onInput={() => setFormError("")}
+                      required
+                    />
+                  </label>
+                </div>
+                {formError && <p className="form-error" role="alert">{formError}</p>}
                 <label>رسالتك<textarea name="message" rows={4} placeholder="أخبرنا كيف يمكننا مساعدتك" required /></label>
                 <button className="button button-gold form-button" type="submit">إرسال عبر واتساب <span aria-hidden="true">←</span></button>
                 <small>سيتم فتح واتساب لإرسال بيانات الاستفسار مباشرة.</small>
