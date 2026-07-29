@@ -1049,6 +1049,23 @@ a {
   resize: vertical;
 }
 
+.contact-form .date-field {
+  min-height: 43px;
+  direction: ltr;
+  text-align: right;
+  color-scheme: light;
+}
+
+.form-error {
+  margin: -10px 0 20px;
+  padding: 10px 12px;
+  border-right: 2px solid #9f443c;
+  background: rgba(159, 68, 60, 0.08);
+  color: #823b35;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
 .contact-form ::placeholder {
   color: #a49d92;
 }
