@@ -514,6 +514,20 @@ export default function Home() {
         </div>
       </footer>
 
+      <a
+        className="floating-whatsapp"
+        href="https://wa.me/967716662727?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%20%D8%A3%D9%88%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%B4%D9%82%D9%82%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%20%D8%B3%D9%8A%D8%AA%D9%8A."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="الحجز والاستفسار عبر واتساب"
+      >
+        <span className="whatsapp-icon" aria-hidden="true">✆</span>
+        <span className="whatsapp-label">
+          <small>للحجز والاستفسار</small>
+          <strong>واتساب</strong>
+        </span>
+      </a>
+
       {selectedImage !== null && (
         <div className="lightbox" role="dialog" aria-modal="true" aria-label={gallery[selectedImage].title} onClick={() => setSelectedImage(null)}>
           <button type="button" aria-label="إغلاق الصورة" onClick={() => setSelectedImage(null)}>×</button>
