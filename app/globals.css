@@ -538,6 +538,57 @@ a {
   font-size: 10px;
 }
 
+.about-visual {
+  position: relative;
+  aspect-ratio: 16 / 8.6;
+  margin: 66px 0 0;
+  overflow: hidden;
+  background: var(--ink-soft);
+}
+
+.about-visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 56%;
+  transition: transform 900ms cubic-bezier(.2, .7, .2, 1);
+}
+
+.about-visual:hover img { transform: scale(1.018); }
+
+.about-visual::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, transparent 54%, rgba(3, 4, 5, 0.82) 100%);
+  pointer-events: none;
+}
+
+.about-visual figcaption {
+  position: absolute;
+  z-index: 1;
+  right: 34px;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.84);
+}
+
+.about-visual figcaption span {
+  color: var(--gold-light);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.about-visual figcaption strong {
+  font-family: Georgia, Tahoma, serif;
+  font-size: clamp(22px, 2.6vw, 34px);
+  font-weight: 400;
+}
+
 .units {
   position: relative;
   overflow: hidden;
@@ -677,7 +728,7 @@ a {
 .gallery-grid {
   display: grid;
   grid-template-columns: 1.15fr 0.425fr 0.425fr;
-  grid-template-rows: 360px 300px 300px 320px 320px 280px auto;
+  grid-template-rows: 360px 300px 300px 320px 320px 280px 340px auto;
   gap: 18px;
 }
 
@@ -732,6 +783,11 @@ a {
 .gallery-item-10 {
   grid-column: 1 / 4;
   grid-row: 6;
+}
+
+.gallery-item-11 {
+  grid-column: 1 / 4;
+  grid-row: 7;
 }
 
 .gallery-item img {
@@ -844,6 +900,72 @@ a {
 .policies-note > span { color: var(--gold-light); }
 .policies-note p { margin: 0; color: rgba(255, 255, 255, 0.72); font-size: 13px; }
 .policies-note strong { color: var(--gold-light); font-size: 12px; font-weight: 500; }
+
+.booking-cta {
+  position: relative;
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #08090a;
+  color: #fff;
+}
+
+.booking-cta-image,
+.booking-cta-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.booking-cta-image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.booking-cta-shade {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(3, 4, 5, 0.92) 0%, rgba(3, 4, 5, 0.76) 32%, rgba(3, 4, 5, 0.14) 64%, rgba(3, 4, 5, 0.18) 100%),
+    linear-gradient(180deg, rgba(3, 4, 5, 0.18), rgba(3, 4, 5, 0.46));
+}
+
+.booking-cta-content {
+  position: relative;
+  z-index: 2;
+  width: min(510px, calc(100% - 48px));
+  margin-right: auto;
+  margin-left: max(24px, calc((100vw - 1180px) / 2));
+  padding: 74px 0;
+}
+
+.booking-cta-content > span {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: var(--gold-light);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.booking-cta-content h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", Tahoma, serif;
+  font-size: clamp(42px, 5.2vw, 72px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.78);
+}
+
+.booking-cta-content p {
+  max-width: 440px;
+  margin: 22px 0 30px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+  line-height: 1.9;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+}
 
 .contact {
   position: relative;
@@ -1556,6 +1678,18 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .about-visual {
+    aspect-ratio: 4 / 3;
+    margin-top: 44px;
+  }
+
+  .about-visual img { object-position: 62% center; }
+
+  .about-visual figcaption {
+    right: 20px;
+    bottom: 20px;
+  }
+
   .section-intro {
     grid-template-columns: 1fr;
     gap: 26px;
@@ -1581,7 +1715,7 @@ footer {
 
   .gallery-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: 430px repeat(9, 260px) auto;
+    grid-template-rows: 430px repeat(10, 260px) auto;
   }
 
   .gallery-item-1,
@@ -1593,7 +1727,8 @@ footer {
   .gallery-item-7,
   .gallery-item-8,
   .gallery-item-9,
-  .gallery-item-10 {
+  .gallery-item-10,
+  .gallery-item-11 {
     grid-column: auto;
     grid-row: auto;
   }
@@ -1602,6 +1737,25 @@ footer {
     grid-column: auto;
     min-height: 240px;
   }
+
+  .booking-cta {
+    min-height: 560px;
+    align-items: flex-end;
+  }
+
+  .booking-cta-image { object-position: 64% center; }
+
+  .booking-cta-shade {
+    background: linear-gradient(180deg, rgba(3, 4, 5, 0.16) 0%, rgba(3, 4, 5, 0.58) 43%, rgba(3, 4, 5, 0.96) 100%);
+  }
+
+  .booking-cta-content {
+    width: min(100% - 32px, 620px);
+    margin-inline: auto;
+    padding: 190px 0 62px;
+  }
+
+  .booking-cta-content h2 { font-size: 44px; }
 
   .contact-form {
     min-height: 0;
