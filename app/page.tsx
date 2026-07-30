@@ -512,7 +512,7 @@ export default function Home() {
             </div>
             <div className="contact-map-frame">
               <iframe
-                src="https://www.google.com/maps?q=%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%20%D8%B3%D9%8A%D8%AA%D9%8A%20%D9%84%D9%84%D8%B4%D9%82%D9%82%20%D8%A7%D9%84%D9%81%D9%86%D8%AF%D9%82%D9%8A%D8%A9%2C%20%D8%A7%D9%84%D8%BA%D9%8A%D8%B6%D8%A9%2C%20%D9%85%D8%AD%D8%A7%D9%81%D8%B8%D8%A9%20%D8%A7%D9%84%D9%85%D9%87%D8%B1%D8%A9%2C%20%D8%A7%D9%84%D9%8A%D9%85%D9%86&amp;output=embed"
+                src="https://www.google.com/maps?q=16.211772%2C52.1924614&amp;z=18&amp;output=embed"
                 title="خريطة موقع الرياض سيتي للشقق الفندقية في الغيضة"
                 loading="lazy"
                 allowFullScreen
