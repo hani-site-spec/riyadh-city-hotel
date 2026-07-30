@@ -70,10 +70,10 @@ const gallery = [
     note: "هوية الرياض سيتي",
   },
   {
-    src: "/images/riyadh-city-hero-main.webp",
-    alt: "صورة جوية ليلية لمبنى الرياض سيتي للشقق الفندقية",
+    src: "/images/riyadh-city-hero-main-20260730.svg",
+    alt: "إطلالة ليلية لواجهة مبنى الرياض سيتي للشقق الفندقية ولافتاته المضيئة",
     title: "إطلالة المبنى ليلًا",
-    note: "صورة جوية لواجهة المبنى",
+    note: "واجهة المبنى ولافتاته المضيئة",
   },
   {
     src: "/images/riyadh-city-reception.webp",
@@ -243,10 +243,10 @@ export default function Home() {
       <section className="hero" id="home" aria-labelledby="hero-title">
         <Image
           className="hero-image"
-          src={assetPath("/images/riyadh-city-hero-main.webp")}
-          alt="صورة جوية ليلية لمبنى الرياض سيتي للشقق الفندقية"
-          width={1536}
-          height={1024}
+          src={assetPath("/images/riyadh-city-hero-main-20260730.svg")}
+          alt="إطلالة ليلية لواجهة مبنى الرياض سيتي للشقق الفندقية ولافتاته المضيئة"
+          width={1800}
+          height={1325}
           priority
           unoptimized
         />
