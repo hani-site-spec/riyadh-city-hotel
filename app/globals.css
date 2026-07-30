@@ -728,7 +728,7 @@ a {
 .gallery-grid {
   display: grid;
   grid-template-columns: 1.15fr 0.425fr 0.425fr;
-  grid-template-rows: 360px 300px 300px 320px 320px 280px 340px auto;
+  grid-template-rows: 360px 300px 300px 320px 320px 280px auto;
   gap: 18px;
 }
 
@@ -1715,7 +1715,7 @@ footer {
 
   .gallery-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: 430px repeat(10, 260px) auto;
+    grid-template-rows: 430px repeat(9, 260px) auto;
   }
 
   .gallery-item-1,
@@ -1727,8 +1727,7 @@ footer {
   .gallery-item-7,
   .gallery-item-8,
   .gallery-item-9,
-  .gallery-item-10,
-  .gallery-item-11 {
+  .gallery-item-10 {
     grid-column: auto;
     grid-row: auto;
   }
