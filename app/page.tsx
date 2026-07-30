@@ -70,10 +70,10 @@ const gallery = [
     note: "هوية الرياض سيتي",
   },
   {
-    src: "/images/riyadh-city-hero-main-20260730.svg",
-    alt: "إطلالة ليلية لواجهة مبنى الرياض سيتي للشقق الفندقية ولافتاته المضيئة",
-    title: "إطلالة المبنى ليلًا",
-    note: "واجهة المبنى ولافتاته المضيئة",
+    src: "/images/riyadh-city-facade-night-20260730.svg",
+    alt: "واجهة مبنى الرياض سيتي للشقق الفندقية ليلًا مع المدخل واللافتة المضيئة",
+    title: "واجهة المبنى ليلًا",
+    note: "الواجهة الأمامية والمدخل",
   },
   {
     src: "/images/riyadh-city-reception.webp",
@@ -122,6 +122,12 @@ const gallery = [
     alt: "الممرات الداخلية واللوحات الإرشادية في الرياض سيتي للشقق الفندقية",
     title: "الممرات الداخلية",
     note: "لوحات إرشادية واضحة",
+  },
+  {
+    src: "/images/riyadh-city-entrance-day-20260730.svg",
+    alt: "واجهة ومدخل الرياض سيتي للشقق الفندقية في الغيضة نهارًا",
+    title: "واجهة ومدخل الرياض سيتي",
+    note: "المدخل الرئيسي والرامب",
   },
 ];
 
@@ -303,6 +309,20 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <figure className="about-visual">
+          <Image
+            src={assetPath("/images/riyadh-city-entrance-day-20260730.svg")}
+            alt="واجهة ومدخل الرياض سيتي للشقق الفندقية في الغيضة نهارًا"
+            width={1600}
+            height={900}
+            loading="lazy"
+            unoptimized
+          />
+          <figcaption>
+            <span>الوصول إلى المبنى</span>
+            <strong>واجهة ومدخل الرياض سيتي</strong>
+          </figcaption>
+        </figure>
       </section>
 
       <section className="units section" id="units">
@@ -351,7 +371,14 @@ export default function Home() {
               onClick={() => setSelectedImage(index)}
               key={image.src}
             >
-              <Image src={assetPath(image.src)} alt={image.alt} width={1586} height={992} loading="eager" unoptimized />
+              <Image
+                src={assetPath(image.src)}
+                alt={image.alt}
+                width={1586}
+                height={992}
+                loading={index < 2 ? "eager" : "lazy"}
+                unoptimized
+              />
               <span className="gallery-overlay">
                 <small>{image.note}</small>
                 <strong>{image.title}</strong>
@@ -394,6 +421,32 @@ export default function Home() {
             <p>شكرًا لتعاونكم، ونتمنى لكم إقامة سعيدة وآمنة.</p>
             <strong>إدارة الرياض سيتي للشقق الفندقية</strong>
           </div>
+        </div>
+      </section>
+
+      <section className="booking-cta" aria-labelledby="booking-cta-title">
+        <Image
+          className="booking-cta-image"
+          src={assetPath("/images/riyadh-city-night-booking-20260730.svg")}
+          alt=""
+          width={1600}
+          height={900}
+          loading="lazy"
+          unoptimized
+        />
+        <div className="booking-cta-shade" />
+        <div className="booking-cta-content">
+          <span>الحجز المباشر</span>
+          <h2 id="booking-cta-title">جاهز لإقامة<br />أكثر راحة؟</h2>
+          <p>اختر تواريخ إقامتك وتواصل معنا مباشرة للحصول على أفضل سعر متاح.</p>
+          <a
+            className="button button-gold"
+            href="https://wa.me/967716662727?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%20%D8%B3%D9%8A%D8%AA%D9%8A%20%D9%84%D9%84%D8%B4%D9%82%D9%82%20%D8%A7%D9%84%D9%81%D9%86%D8%AF%D9%82%D9%8A%D8%A9."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            احجز عبر واتساب <span aria-hidden="true">←</span>
+          </a>
         </div>
       </section>
 
