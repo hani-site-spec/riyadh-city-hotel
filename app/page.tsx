@@ -494,6 +494,32 @@ export default function Home() {
               </>
             )}
           </form>
+
+          <div className="contact-map" aria-labelledby="location-map-title">
+            <div className="contact-map-heading">
+              <div>
+                <span>موقعنا على الخريطة</span>
+                <h3 id="location-map-title">الرياض سيتي — الغيضة</h3>
+              </div>
+              <a
+                href="https://maps.app.goo.gl/LtMr5WRQPiZa3xeX8"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="فتح موقع الرياض سيتي في تطبيق خرائط Google"
+              >
+                فتح الاتجاهات في خرائط Google <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <div className="contact-map-frame">
+              <iframe
+                src="https://www.google.com/maps?q=%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%20%D8%B3%D9%8A%D8%AA%D9%8A%20%D9%84%D9%84%D8%B4%D9%82%D9%82%20%D8%A7%D9%84%D9%81%D9%86%D8%AF%D9%82%D9%8A%D8%A9%2C%20%D8%A7%D9%84%D8%BA%D9%8A%D8%B6%D8%A9%2C%20%D9%85%D8%AD%D8%A7%D9%81%D8%B8%D8%A9%20%D8%A7%D9%84%D9%85%D9%87%D8%B1%D8%A9%2C%20%D8%A7%D9%84%D9%8A%D9%85%D9%86&amp;output=embed"
+                title="خريطة موقع الرياض سيتي للشقق الفندقية في الغيضة"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
