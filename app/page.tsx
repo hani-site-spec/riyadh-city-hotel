@@ -355,7 +355,7 @@ export default function Home() {
         <div className="section-kicker"><span>03</span><p>معرض الصور</p></div>
         <div className="section-intro">
           <h2>لمحة عن<br /><em>التجربة.</em></h2>
-          <p>صور فعلية لواجهة المبنى والاستقبال والشقق والممرات الداخلية. اضغط على أي صورة لمشاهدتها بحجم أكبر.</p>
+          <p>استكشف مرافق الرياض سيتي من خلال صور واقعية</p>
         </div>
         <div className="gallery-grid">
           {gallery.map((image, index) => (
