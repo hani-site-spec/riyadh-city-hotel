@@ -5,6 +5,7 @@ import Image from "next/image";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const assetPath = (path: string) => `${basePath}${path}`;
+const bookingApiUrl = "https://riyadh-city-serviced-apartments.habood12.chatgpt.site/api/booking-requests";
 
 function toDateInputValue(date: Date) {
   const year = date.getFullYear();
@@ -18,13 +19,6 @@ function nextDay(dateValue: string) {
   const date = new Date(`${dateValue}T00:00:00`);
   date.setDate(date.getDate() + 1);
   return toDateInputValue(date);
-}
-
-function formatBookingDate(dateValue: FormDataEntryValue | null) {
-  const value = String(dateValue || "");
-  if (!value) return "غير محدد";
-  const [year, month, day] = value.split("-");
-  return `${day}/${month}/${year}`;
 }
 
 const units = [
@@ -151,6 +145,8 @@ export default function Home() {
   const [today, setToday] = useState("");
   const [checkIn, setCheckIn] = useState("");
   const [formError, setFormError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [requestId, setRequestId] = useState("");
 
   useEffect(() => {
     setToday(toDateInputValue(new Date()));
@@ -165,15 +161,10 @@ export default function Home() {
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, []);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const subjects: Record<string, string> = {
-      booking: "حجز وإقامة",
-      units: "أنواع الشقق",
-      other: "استفسار عام",
-    };
-    const subject = String(formData.get("subject") || "booking");
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const checkInDate = String(formData.get("checkIn") || "");
     const checkOutDate = String(formData.get("checkOut") || "");
 
@@ -183,18 +174,34 @@ export default function Home() {
     }
 
     setFormError("");
-    const message = [
-      "مرحبًا، أرغب في الاستفسار عبر موقع الرياض سيتي للشقق الفندقية.",
-      `الاسم: ${String(formData.get("name") || "")}`,
-      `رقم التواصل: ${String(formData.get("phone") || "")}`,
-      `نوع الاستفسار: ${subjects[subject] || subjects.other}`,
-      `تاريخ الوصول: ${formatBookingDate(formData.get("checkIn"))}`,
-      `تاريخ المغادرة: ${formatBookingDate(formData.get("checkOut"))}`,
-      `الرسالة: ${String(formData.get("message") || "")}`,
-    ].join("\n");
-
-    window.open(`https://wa.me/967716662727?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
-    setSubmitted(true);
+    setSubmitting(true);
+    try {
+      const response = await fetch(bookingApiUrl, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          phone: formData.get("phone"),
+          subject: "booking",
+          apartmentType: formData.get("apartmentType"),
+          guests: Number(formData.get("guests")),
+          checkIn: checkInDate,
+          checkOut: checkOutDate,
+          message: formData.get("message"),
+          website: formData.get("website"),
+        }),
+      });
+      const result = await response.json() as { ok?: boolean; message?: string; requestId?: string };
+      if (!response.ok || !result.ok) throw new Error(result.message || "تعذر إرسال الطلب. حاول مرة أخرى.");
+      setRequestId(result.requestId || "");
+      setSubmitted(true);
+      form.reset();
+      setCheckIn("");
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : "تعذر الاتصال بنظام الحجز. تحقق من الإنترنت وحاول مجددًا.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -491,9 +498,10 @@ export default function Home() {
             {submitted ? (
               <div className="form-success" role="status">
                 <span>✓</span>
-                <h3>تم تجهيز رسالتك عبر واتساب</h3>
-                <p>أكمل إرسال الرسالة من نافذة واتساب التي تم فتحها.</p>
-                <button type="button" onClick={() => setSubmitted(false)}>إرسال استفسار آخر</button>
+                <h3>تم استلام طلب الحجز</h3>
+                <p>وصل الطلب مباشرة إلى موظف الاستقبال، وسيتم التواصل معك لتأكيد التوفر والسعر.</p>
+                {requestId && <code className="booking-request-id" dir="ltr">{requestId}</code>}
+                <button type="button" onClick={() => { setSubmitted(false); setRequestId(""); }}>إرسال طلب آخر</button>
               </div>
             ) : (
               <>
@@ -501,12 +509,24 @@ export default function Home() {
                   <label>الاسم الكامل<input name="name" type="text" placeholder="اكتب اسمك" required /></label>
                   <label>رقم التواصل<input name="phone" type="tel" inputMode="tel" placeholder="مثال: 777 000 000" required /></label>
                 </div>
-                <label>نوع الاستفسار
-                  <select name="subject" defaultValue="booking">
-                    <option value="booking">حجز وإقامة</option>
-                    <option value="units">أنواع الشقق</option>
-                    <option value="other">استفسار عام</option>
-                  </select>
+                <div className="field-row">
+                  <label>نوع الشقة
+                    <select name="apartmentType" defaultValue="ديلوكس" required>
+                      <option value="ديلوكس">ديلوكس</option>
+                      <option value="سوبيريور">سوبيريور</option>
+                    </select>
+                  </label>
+                  <label>عدد النزلاء
+                    <select name="guests" defaultValue="2" required>
+                      <option value="1">نزيل واحد</option>
+                      <option value="2">نزيلان</option>
+                      <option value="3">3 نزلاء</option>
+                      <option value="4">4 نزلاء</option>
+                    </select>
+                  </label>
+                </div>
+                <label className="website-trap" aria-hidden="true">اترك هذا الحقل فارغًا
+                  <input name="website" type="text" tabIndex={-1} autoComplete="off" />
                 </label>
                 <div className="field-row booking-dates">
                   <label>تاريخ الوصول
@@ -536,8 +556,8 @@ export default function Home() {
                 </div>
                 {formError && <p className="form-error" role="alert">{formError}</p>}
                 <label>رسالتك<textarea name="message" rows={4} placeholder="أخبرنا كيف يمكننا مساعدتك" required /></label>
-                <button className="button button-gold form-button" type="submit">إرسال عبر واتساب <span aria-hidden="true">←</span></button>
-                <small>سيتم فتح واتساب لإرسال بيانات الاستفسار مباشرة.</small>
+                <button className="button button-gold form-button" type="submit" disabled={submitting}>{submitting ? "جاري إرسال الطلب…" : "إرسال طلب الحجز"} <span aria-hidden="true">←</span></button>
+                <small>سيصل الطلب مباشرة إلى نظام الاستقبال، ويصبح الحجز مؤكدًا بعد مراجعة الموظف.</small>
               </>
             )}
           </form>
